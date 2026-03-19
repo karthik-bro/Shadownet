@@ -1,6 +1,7 @@
+from encryption.crypto import decrypt
 import socket
 
-host = "0.0.0.0"
+host = "127.0.0.1"
 port = 5001
 
 s = socket.socket()
@@ -11,12 +12,17 @@ print("Waiting for connection...")
 conn, addr = s.accept()
 print("Connected from:", addr)
 
-with open("received_file.txt", "wb") as f:
-    while True:
-        data = conn.recv(1024)
-        if not data:
-            break
-        f.write(data)
+data = b""
+while True:
+    chunk = conn.recv(1024)
+    if not chunk:
+        break
+    data += chunk
 
-print("File received successfully!")
+decrypted_data = decrypt(data)
+
+with open("received_file.txt", "wb") as f:
+    f.write(decrypted_data)
+
+print("Decrypted file received successfully!")
 conn.close()

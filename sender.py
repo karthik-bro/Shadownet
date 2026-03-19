@@ -1,13 +1,16 @@
-from cryptography.fernet import Fernet
+from encryption.crypto import encrypt
+import socket
 
-# Generate key (temporary)
-key = Fernet.generate_key()
-cipher = Fernet(key)
+host = input("Enter receiver IP: ")
+port = 5001
 
-def encrypt(data):
-    return cipher.encrypt(data)
+s = socket.socket()
+s.connect((host, port))
 
-def decrypt(data):
-    return cipher.decrypt(data)
+with open("file.txt", "rb") as f:
+    data = f.read()
+    encrypted_data = encrypt(data)   #  encrypt here
+    s.sendall(encrypted_data)
 
-print(key)  # this will show your key
+print("Encrypted file sent successfully!")
+s.close()
