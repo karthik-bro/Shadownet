@@ -1,2 +1,2 @@
 # Shadownet
-send and receiving the data in encryption format
+sendinding and receiving the data in encryption format.
