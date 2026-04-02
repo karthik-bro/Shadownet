@@ -1,6 +1,6 @@
 # Shadownet
 
-## 📌 Description
+## Description
 ShadowNet is a simple Python project that demonstrates basic file handling using text files.  
 It allows users to read, write, and update data stored in a `.txt` file.
 
